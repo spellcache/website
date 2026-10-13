@@ -1,0 +1,61 @@
+---
+import { links } from '../data/site';
+---
+
+<footer>
+  <div class="container top">
+    <span class="name">spellcache</span>
+    <nav aria-label="Footer" class="links">
+      <a href={links.repo}>GitHub</a>
+      <a href={links.docs}>Docs</a>
+      <a href="/legal">Legal notice</a>
+    </nav>
+  </div>
+  <div class="container">
+    <p class="legal">
+      spellcache is unofficial Fan Content permitted under the <a href={links.fanContentPolicy}>Fan Content Policy</a>.
+      Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast.
+      ©Wizards of the Coast LLC. Card data by <a href={links.scryfall}>Scryfall</a>. <a href="/legal">More</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .top {
+    padding-block: 40px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    font-size: 14px;
+  }
+
+  .links a {
+    color: var(--text-2);
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    color: var(--text);
+  }
+
+  .legal {
+    padding-block: 20px 40px;
+    border-top: 1px solid var(--line);
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--text-3);
+  }
+</style>

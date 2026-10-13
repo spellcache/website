@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import { links } from '../data/site';
+---
+
+<Base title="Legal notice — spellcache" description="Legal notice, trademarks, data sources and privacy for spellcache.com.">
+  <article class="container legal">
+    <h1>Legal notice</h1>
+
+    <section>
+      <h2>Publisher</h2>
+      <p>
+        spellcache.com is published by [OPERATOR NAME], [POSTAL ADDRESS], Switzerland. Contact:
+        <a href="mailto:[CONTACT EMAIL]">[CONTACT EMAIL]</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Wizards of the Coast</h2>
+      <p>
+        spellcache is unofficial Fan Content permitted under the <a href={links.fanContentPolicy}>Fan Content Policy</a>.
+        Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards
+        of the Coast LLC.
+      </p>
+      <p>Magic: The Gathering and its logos, card names, symbols and artwork are trademarks of Wizards of the Coast LLC.</p>
+    </section>
+
+    <section>
+      <h2>Scryfall</h2>
+      <p>
+        Card data, images and prices used by spellcache are provided by <a href={links.scryfall}>Scryfall</a> and are
+        subject to Scryfall's terms. spellcache is not affiliated with Scryfall.
+      </p>
+    </section>
+
+    <section>
+      <h2>Privacy</h2>
+      <p>
+        This website sets no cookies and uses no analytics or third-party trackers. Fonts are served from this domain. The
+        hosting provider may keep technical access logs (IP address, date, requested page) for security purposes.
+      </p>
+      <p>
+        spellcache itself is self-hosted: the data of an instance is stored and processed by whoever runs that instance,
+        not by the publisher of this website.
+      </p>
+    </section>
+
+    <section>
+      <h2>License</h2>
+      <p>
+        The source code of spellcache and of this website is released under the MIT License. See the
+        <a href={links.repo}>spellcache repository</a>.
+      </p>
+    </section>
+
+    <p><a href="/">← Back to the home page</a></p>
+  </article>
+</Base>
+
+<style>
+  .legal {
+    max-width: 760px;
+    padding-block: 48px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  p {
+    color: var(--text-2);
+  }
+</style>
