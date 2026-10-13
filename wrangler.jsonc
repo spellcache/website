@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "spellcache",
+  "compatibility_date": "2026-10-01",
+  // Site statique sans code serveur : le Worker ne sert que les fichiers de dist/,
+  // avec public/_headers et public/_redirects.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
