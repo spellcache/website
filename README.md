@@ -2,7 +2,7 @@
 
 The source of [spellcache.com](https://spellcache.com), the website of
 [spellcache](https://github.com/spellcache/spellcache): a static site built
-with [Astro](https://astro.build) and deployed on Cloudflare Pages.
+with [Astro](https://astro.build) and deployed on Cloudflare Workers.
 
 ## Development
 
@@ -27,23 +27,30 @@ pnpm build      # static output in dist/
 
 ## Deployment
 
-Cloudflare Pages builds `main` on every push:
+The site is a Cloudflare Worker that only serves static assets
+(`wrangler.jsonc`). Workers Builds deploys `main` on every push and uploads a
+preview version for other branches:
 
 | Setting | Value |
 | --- | --- |
 | Build command | `pnpm build` |
-| Build output directory | `dist` |
-| Environment variable | `NODE_VERSION=24` |
-
-Pull requests get a preview deployment.
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler versions upload` |
+| Build variables | `NODE_VERSION=24`, `PNPM_VERSION=10.27.0` |
 
 - `public/_headers` sets the security headers (strict CSP: no inline script or
   style, no third-party origin).
 - `public/_redirects` maps `/install.sh` to the installer of the latest
   release.
-- `get.spellcache.com` is not served by Pages: it is a Cloudflare redirect rule
-  (302) on the zone, from `get.spellcache.com/*` to
+- `www.spellcache.com` and `get.spellcache.com` are Cloudflare redirect rules
+  on the zone: `www` to the apex, `get` (302) to
   `https://github.com/spellcache/spellcache/releases/latest/download/install.sh`.
+
+To test the production behaviour locally (headers, redirects, 404):
+
+```bash
+pnpm build && pnpm exec wrangler dev
+```
 
 ## Contributing
 
