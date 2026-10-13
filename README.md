@@ -19,9 +19,10 @@ pnpm build      # static output in dist/
 
 - Page copy lives in `src/pages/` and the lists (features, screenshots, data
   flow, links) in `src/data/site.ts`.
-- Screenshots go in `src/assets/screenshots/`, named `<key>-mobile.png`
-  (390×844) and `<key>-desktop.png` (1440×900), with the keys listed in
-  `src/data/site.ts`. A missing file shows a placeholder.
+- Screenshots go in `src/assets/screenshots/`, named `<key>-mobile.webp` (a
+  phone capture, resized to 780 px wide) and `<key>-desktop.webp` (1440×900),
+  with the keys listed in `src/data/site.ts`. A missing file shows a
+  placeholder.
 - Fonts are self-hosted through Fontsource; the site loads nothing from a third
   party.
 
