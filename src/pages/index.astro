@@ -1,0 +1,637 @@
+---
+import Base from '../layouts/Base.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import Shot from '../components/Shot.astro';
+import { dataFlow, features, installCommand, links, screenshots } from '../data/site';
+---
+
+<Base
+  title="spellcache — your Magic collection, on your own server"
+  description="Self-hosted, mobile-first Magic: The Gathering collection manager. Inventory, binders, decks, prices, trades and table tools — open source."
+>
+  <section id="top" class="container hero">
+    <div class="hero-text">
+      <p class="eyebrow">Self-hosted · Mobile-first · Open source</p>
+      <h1>Your Magic collection, on your own server.</h1>
+      <p class="hero-lead">
+        Inventory, binders, decks, prices, trades and table tools — in a web app you run yourself. Card data comes from a
+        nightly Scryfall mirror, so nothing leaves your server while you browse.
+      </p>
+      <div class="actions">
+        <a href="#self-host" class="btn btn-primary">Self-host it</a>
+        <a href="#screenshots" class="btn btn-secondary">See screenshots</a>
+      </div>
+      <p class="hero-meta">Free and open source · No ads, no tracking · Phone, desktop and Android</p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="window">
+        <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        <Shot name="collection" device="desktop" alt="The collection screen on desktop" class="window-shot" eager />
+      </div>
+      <div class="phone">
+        <Shot name="deck-builder" device="mobile" alt="A deck on mobile" eager />
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="band">
+    <div class="container section">
+      <div class="intro">
+        <p class="eyebrow">Features</p>
+        <h2 class="section-title">Everything you need to manage your cards.</h2>
+        <p class="lead">Track every copy, build decks, follow prices and trade — from your phone or your desktop.</p>
+      </div>
+      <div class="features">
+        {
+          features.map((f) => (
+            <article class="feature">
+              <span class="feature-icon">
+                <FeatureIcon name={f.icon} />
+              </span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="screenshots" class="container section gallery" data-device="mobile">
+    <div class="gallery-head">
+      <h2 class="section-title">See it in action.</h2>
+      <div role="group" aria-label="Device" class="toggle">
+        <button type="button" data-device-button="mobile" aria-pressed="true">Mobile</button>
+        <button type="button" data-device-button="desktop" aria-pressed="false">Desktop</button>
+      </div>
+    </div>
+    {
+      (['mobile', 'desktop'] as const).map((device) => (
+        <div class={`shots shots-${device}`} data-shots={device}>
+          {screenshots.map((s) => (
+            <figure>
+              <Shot name={s.key} device={device} alt={`${s.title} screen on ${device}`} />
+              <figcaption>
+                <strong>{s.title}</strong>
+                <span>{s.body}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      ))
+    }
+  </section>
+
+  <section id="demo" class="container demo-wrap">
+    <div class="demo">
+      <div class="demo-text">
+        <p class="eyebrow">Live demo</p>
+        <h2>Try it before you install it.</h2>
+        <p class="lead">A public demo server with a sample collection, decks and binders is on its way.</p>
+      </div>
+      <span class="soon">Coming soon</span>
+    </div>
+  </section>
+
+  <section id="data" class="container section">
+    <div class="intro">
+      <h2 class="section-title">Your cards stay home.</h2>
+      <p class="lead">
+        Card data, images and prices are mirrored from Scryfall's bulk files once a night. Browsing, searching and deck
+        building only ever hit your own database.
+      </p>
+    </div>
+    <ol class="flow">
+      {
+        dataFlow.map((s, i) => (
+          <li>
+            <span class="flow-when">
+              {String(i + 1).padStart(2, '0')} · {s.when}
+            </span>
+            <strong>{s.title}</strong>
+            <span class="flow-body">{s.body}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="container table-wrap">
+    <div class="table">
+      <div class="table-text">
+        <h2>At the table, too.</h2>
+        <p>A life counter, a first-player pick and a deck playtest — on the same phone that holds your collection.</p>
+      </div>
+      <ul class="pills">
+        <li>Life counter</li>
+        <li>First player</li>
+        <li>Playtest</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="self-host" class="band">
+    <div class="container section self-host">
+      <div class="self-host-text">
+        <h2 class="section-title">Up in one command.</h2>
+        <p class="lead">
+          No clone, no build. You need a machine that runs Docker (a Linux server, a NAS or a Raspberry Pi), a domain with
+          HTTPS, and a Resend account for emails.
+        </p>
+        <div class="self-host-links">
+          <a href={links.selfHostingGuide}>Read the self-hosting guide →</a>
+          <a href={links.installScript}>Read the script before running it →</a>
+        </div>
+      </div>
+      <div class="terminal">
+        <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        <pre><span class="prompt" aria-hidden="true">$</span> <code>{installCommand}</code>
+
+<span class="comment"># fetches docker-compose.yml and .env.example for the latest release
+# pins SPELLCACHE_VERSION and generates AUTH_SECRET
+# asks for your domain and Resend key
+# starts the stack and runs the first catalogue import</span></pre>
+        <p class="manual">
+          Prefer to do it by hand? Download <code>docker-compose.yml</code> and <code>.env.example</code> from the
+          <a href={links.latestRelease}>latest release</a> and follow the guide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section open-source">
+    <h2 class="section-title">Open source, built by players.</h2>
+    <p class="lead">MIT licensed. Issues, ideas and pull requests are welcome on GitHub.</p>
+    <div class="actions">
+      <a href={links.repo} class="btn btn-primary">Star on GitHub</a>
+      <a href={links.releases} class="btn btn-secondary">Releases &amp; changelog</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Bascule mobile / desktop de la galerie ; sans JS, la vue mobile reste affichée.
+  const gallery = document.querySelector<HTMLElement>('#screenshots');
+  const buttons = gallery?.querySelectorAll<HTMLButtonElement>('[data-device-button]') ?? [];
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      const device = button.dataset.deviceButton;
+      if (!gallery || !device) return;
+      gallery.dataset.device = device;
+      for (const other of buttons) {
+        other.setAttribute('aria-pressed', String(other === button));
+      }
+    });
+  }
+</script>
+
+<style>
+  .section {
+    padding-block: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 680px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .window-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .window-bar span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--line-strong);
+  }
+
+  /* Hero */
+  .hero {
+    padding-block: 72px 96px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 64px;
+  }
+
+  .hero-text {
+    flex: 999 1 520px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: clamp(44px, 6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -2px;
+  }
+
+  .hero-lead {
+    max-width: 560px;
+    font-size: 19px;
+    color: var(--text-2);
+  }
+
+  .hero-meta {
+    font-size: 14px;
+    color: var(--text-3);
+  }
+
+  .hero-visual {
+    flex: 1 1 460px;
+    min-width: 0;
+    position: relative;
+    padding-bottom: 48px;
+  }
+
+  .window {
+    border-radius: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    overflow: hidden;
+  }
+
+  .window :global(.window-shot) {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .phone {
+    position: absolute;
+    right: -8px;
+    bottom: 0;
+    width: 34%;
+    min-width: 130px;
+    border-radius: 26px;
+    padding: 8px;
+    background: #2a2638;
+    border: 1px solid #4a4463;
+  }
+
+  .phone :global(.shot) {
+    border: 0;
+    border-radius: 19px;
+    font-size: 11px;
+  }
+
+  /* Features */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 20px;
+  }
+
+  .feature {
+    padding: 28px;
+    border-radius: 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--surface-3);
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature h3 {
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .feature p {
+    color: var(--text-2);
+    font-size: 16px;
+  }
+
+  /* Galerie */
+  .gallery {
+    padding-bottom: 0;
+    gap: 40px;
+  }
+
+  .gallery-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+  }
+
+  .toggle {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+  }
+
+  .toggle button {
+    min-height: 40px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-2);
+  }
+
+  .toggle button[aria-pressed='true'] {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .shots {
+    display: grid;
+    gap: 24px;
+  }
+
+  .shots-mobile {
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  }
+
+  .shots-desktop {
+    grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+  }
+
+  .gallery[data-device='mobile'] .shots-desktop,
+  .gallery[data-device='desktop'] .shots-mobile {
+    display: none;
+  }
+
+  figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  figcaption strong {
+    font-family: var(--font-display);
+    font-size: 18px;
+  }
+
+  figcaption span {
+    color: var(--text-3);
+    font-size: 14px;
+  }
+
+  /* Démo */
+  .demo-wrap {
+    padding-top: 96px;
+  }
+
+  .demo {
+    border-radius: 24px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    padding: clamp(28px, 5vw, 48px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .demo-text {
+    flex: 999 1 460px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .demo h2 {
+    font-weight: 700;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .soon {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 28px;
+    border-radius: 12px;
+    border: 1px dashed #4a4463;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Flux de données */
+  .flow {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 32px;
+  }
+
+  .flow li {
+    padding-top: 20px;
+    border-top: 1px solid var(--line-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .flow-when {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-3);
+  }
+
+  .flow strong {
+    font-family: var(--font-display);
+    font-size: 20px;
+  }
+
+  .flow-body {
+    color: var(--text-2);
+    font-size: 15px;
+  }
+
+  /* À la table */
+  .table-wrap {
+    padding-bottom: 96px;
+  }
+
+  .table {
+    border-radius: 24px;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .table-text {
+    flex: 999 1 420px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .table h2 {
+    font-weight: 800;
+    font-size: clamp(30px, 3.6vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .table p {
+    font-size: 18px;
+    color: #3b3020;
+  }
+
+  .pills {
+    flex: 1 1 280px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pills li {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Self-host */
+  .self-host {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 56px;
+  }
+
+  .self-host-text {
+    flex: 1 1 340px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .self-host-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 600;
+  }
+
+  .terminal {
+    flex: 999 1 560px;
+    min-width: 0;
+    border-radius: 16px;
+    background: var(--terminal);
+    border: 1px solid var(--surface-3);
+    overflow: hidden;
+  }
+
+  .terminal .window-bar {
+    padding: 14px 18px;
+    gap: 8px;
+    border-color: var(--line);
+  }
+
+  .terminal .window-bar span {
+    width: 10px;
+    height: 10px;
+  }
+
+  pre {
+    margin: 0;
+    padding: 24px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.9;
+    color: #d9d3e6;
+  }
+
+  pre code {
+    font-family: inherit;
+  }
+
+  .prompt {
+    color: var(--text-3);
+    user-select: none;
+  }
+
+  .comment {
+    color: var(--text-3);
+  }
+
+  .manual {
+    padding: 16px 24px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--text-3);
+  }
+
+  .manual code {
+    font-family: var(--font-mono);
+    color: #d9d3e6;
+  }
+
+  /* Open source */
+  .open-source {
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .open-source .actions {
+    justify-content: center;
+  }
+</style>
