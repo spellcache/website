@@ -146,7 +146,7 @@ import { dataFlow, features, installCommand, links, screenshots } from '../data/
       </div>
       <div class="terminal">
         <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-        <pre><span class="prompt" aria-hidden="true">$</span> <code>{installCommand}</code>
+        <pre><span class="dollar" aria-hidden="true">$</span> <code>{installCommand}</code>
 
 <span class="comment"># fetches docker-compose.yml and .env.example for the latest release
 # pins SPELLCACHE_VERSION and generates AUTH_SECRET
@@ -603,7 +603,7 @@ import { dataFlow, features, installCommand, links, screenshots } from '../data/
     font-family: inherit;
   }
 
-  .prompt {
+  .dollar {
     color: var(--text-3);
     user-select: none;
   }
