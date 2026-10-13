@@ -50,9 +50,9 @@ export const features: { icon: FeatureIcon; title: string; body: string }[] = [
   },
 ];
 
-// Captures à déposer dans src/assets/screenshots/<key>-<device>.png (device :
-// mobile 390×844 ou desktop 1440×900) ; sans fichier,
-// la page affiche un emplacement réservé.
+// Captures dans src/assets/screenshots/<key>-<device>.webp (mobile : capture
+// d'un téléphone sur 780 px de large ; desktop : 1440×900) ; sans fichier, la
+// page affiche un emplacement réservé.
 export const screenshots = [
   { key: 'collection', title: 'Collection', body: 'Search, filter and edit every copy.' },
   { key: 'deck-builder', title: 'Deck builder', body: 'Legality per format, owned vs missing.' },
