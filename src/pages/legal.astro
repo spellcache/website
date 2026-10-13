@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { links } from '../data/site';
+import { contactEmail, links } from '../data/site';
 ---
 
 <Base title="Legal notice — spellcache" description="Legal notice, trademarks, data sources and privacy for spellcache.com.">
@@ -10,8 +10,8 @@ import { links } from '../data/site';
     <section>
       <h2>Publisher</h2>
       <p>
-        spellcache.com is published by [OPERATOR NAME], [POSTAL ADDRESS], Switzerland.
-        Contact: <a href="mailto:[CONTACT EMAIL]">[CONTACT EMAIL]</a>.
+        spellcache.com is published by the spellcache contributors.
+        Contact: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
       </p>
     </section>
 

@@ -7,10 +7,11 @@ export const links = {
   manualInstall: `${repo}/blob/main/docs/self-hosting.md#21-get-the-files`,
   installScript: `${repo}/blob/main/install.sh`,
   releases: `${repo}/releases`,
-  latestRelease: `${repo}/releases/latest`,
   fanContentPolicy: 'https://company.wizards.com/en/legal/fancontentpolicy',
   scryfall: 'https://scryfall.com',
 };
+
+export const contactEmail = 'contact@spellcache.com';
 
 export const installCommand = 'curl -fsSL https://get.spellcache.com | sudo sh';
 
