@@ -4,6 +4,7 @@ export const links = {
   repo,
   docs: `${repo}/tree/main/docs`,
   selfHostingGuide: `${repo}/blob/main/docs/self-hosting.md`,
+  manualInstall: `${repo}/blob/main/docs/self-hosting.md#21-get-the-files`,
   installScript: `${repo}/blob/main/install.sh`,
   releases: `${repo}/releases`,
   latestRelease: `${repo}/releases/latest`,
@@ -11,7 +12,7 @@ export const links = {
   scryfall: 'https://scryfall.com',
 };
 
-export const installCommand = 'curl -fsSL https://get.spellcache.com | sh';
+export const installCommand = 'curl -fsSL https://get.spellcache.com | sudo sh';
 
 export type FeatureIcon = 'collection' | 'decks' | 'value' | 'trading' | 'sharing' | 'mobile';
 

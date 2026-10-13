@@ -148,13 +148,15 @@ import { dataFlow, features, installCommand, links, screenshots } from '../data/
         <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
         <pre><span class="dollar" aria-hidden="true">$</span> <code>{installCommand}</code>
 
-<span class="comment"># fetches docker-compose.yml and .env.example for the latest release
-# pins SPELLCACHE_VERSION and generates AUTH_SECRET
-# asks for your domain and Resend key
-# starts the stack and runs the first catalogue import</span></pre>
+<span class="comment"># downloads the latest release files into /srv/spellcache
+# asks for your URL, admin email and Resend key
+# generates the secrets and pins the version
+# starts the stack and queues the catalogue import
+# run it again to update</span></pre>
         <p class="manual">
-          Prefer to do it by hand? Download <code>docker-compose.yml</code> and <code>.env.example</code> from the
-          <a href={links.latestRelease}>latest release</a> and follow the guide.
+          Prefer to do it by hand? Download <code>docker-compose.example.yml</code> and <code>.env.example</code> from
+          the <a href={links.latestRelease}>latest release</a> and follow the <a href={links.manualInstall}>manual
+          steps</a>.
         </p>
       </div>
     </div>
