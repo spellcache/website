@@ -1,10 +1,11 @@
 const repo = 'https://github.com/spellcache/spellcache';
+const docs = 'https://spellcache.github.io/spellcache';
 
 export const links = {
   repo,
-  docs: `${repo}/tree/main/docs`,
-  selfHostingGuide: `${repo}/blob/main/docs/self-hosting.md`,
-  manualInstall: `${repo}/blob/main/docs/self-hosting.md#21-get-the-files`,
+  docs: `${docs}/`,
+  selfHostingGuide: `${docs}/self-hosting/installation/`,
+  manualInstall: `${docs}/self-hosting/installation/#get-the-files`,
   installScript: `${repo}/blob/main/install.sh`,
   releases: `${repo}/releases`,
   fanContentPolicy: 'https://company.wizards.com/en/legal/fancontentpolicy',
